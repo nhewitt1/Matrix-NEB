@@ -21,8 +21,8 @@ class Engine(object):
 
     def setup(self):
         self.webhook = NebHookServer(8500)
-        self.webhook.daemon = True
-        self.webhook.start()
+        #self.webhook.daemon = True
+        #self.webhook.start()
 
         # init the plugins
         for cls_name in self.plugin_cls:

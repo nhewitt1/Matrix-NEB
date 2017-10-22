@@ -12,6 +12,7 @@ from plugins.url import UrlPlugin
 from plugins.time_utils import TimePlugin
 from plugins.github import GithubPlugin
 from plugins.prometheus import PrometheusPlugin
+from plugins.crypto import CryptoPlugin
 
 import logging
 import logging.handlers
@@ -29,7 +30,8 @@ def generate_config(url, username, token, config_loc):
             hs_url=url,
             user_id=username,
             access_token=token,
-            admins=[]
+            admins=[],
+            case_insensitive=False
     )
     save_config(config_loc, config)
     return config
@@ -74,11 +76,12 @@ def main(config):
         TimePlugin,
         Base64Plugin,
         GuessNumberPlugin,
-        JiraPlugin,
+        #JiraPlugin,
         UrlPlugin,
-        GithubPlugin,
-        JenkinsPlugin,
-        PrometheusPlugin,
+        #GithubPlugin,
+        #JenkinsPlugin,
+        #PrometheusPlugin,
+        CryptoPlugin,
     ]
 
     # setup engine
