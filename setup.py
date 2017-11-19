@@ -15,7 +15,8 @@ setup(
         "Flask",
         "python-dateutil",
         "plotly",
-        "coinmarketcap"
+        "coinmarketcap",
+        "crycompare"
     ],
     dependency_links=[
         "https://github.com/matrix-org/matrix-python-sdk/tarball/v0.0.5#egg=matrix_client-0.0.5"
