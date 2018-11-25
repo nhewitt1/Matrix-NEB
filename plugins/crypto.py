@@ -1,6 +1,7 @@
 from neb.plugins import Plugin
 from coinmarketcap import Market
-import crycompare
+import crycompare.history as cryhistory
+import crycompare.price as cryprice
 import plotly
 import plotly.graph_objs as graph
 import datetime
@@ -19,8 +20,8 @@ class CryptoPlugin(Plugin):
         super(Plugin, self).__init__(*args, **kwargs)
         self.market = Market()
         # init history object from crypto compare library
-        self.history = crycompare.History()
-        self.price = crycompare.Price()
+        self.history = cryhistory
+        self.price = cryprice
 
 
     def cmd_snapshot(self, event, symbol, convert='ETH'):
@@ -31,7 +32,7 @@ class CryptoPlugin(Plugin):
         :param convert:
         :return:
         """
-        return str(json.dumps(self.price.coinSnapshot(symbol, convert), indent=4))
+        return str(json.dumps(self.price.coin_snapshot(symbol, convert), indent=4))
 
 
     def cmd_price(self, event, symbol, convert='ETH'):
@@ -55,7 +56,7 @@ class CryptoPlugin(Plugin):
         print event
 
         # retrieve coin list
-        data = self.price.coinList()
+        data = self.price.coin_list()
 
         # get dict containing all coins
         dataDict = data['Data']
@@ -141,11 +142,11 @@ class CryptoPlugin(Plugin):
         ts = self._get_current_timestamp()
 
         if unit == 'days':
-            data = self.history.histoHour(from_curr=symbol, to_curr=convert, limit=24 * int(from_unit), toTs=ts)
+            data = self.history.histo_hour(from_curr=symbol, to_curr=convert, limit=24 * int(from_unit), to_ts=ts)
         elif unit == 'hour':
-            data = self.history.histoMinute(from_curr=symbol, to_curr=convert, limit=60 * int(from_unit), toTs=ts)
+            data = self.history.histo_minute(from_curr=symbol, to_curr=convert, limit=60 * int(from_unit), to_ts=ts)
 
-        dataArr = data['Data']
+        dataArr = data
 
         time_arr = []
         link_data = []
