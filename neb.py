@@ -71,6 +71,9 @@ def main(config):
     # setup api/endpoint
     matrix = MatrixHttpApi(config.base_url, config.token)
 
+   # cert validation does not seem to be working in requests module
+    matrix.validate_certificate(False)
+
     log.debug("Setting up plugins...")
     plugins = [
         TimePlugin,
